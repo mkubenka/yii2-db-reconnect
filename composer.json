@@ -1,0 +1,23 @@
+{
+    "name": "mkubenka/yii2-db-reconnect",
+    "description": "Yii2 DB Auto Reconnect",
+    "type": "yii2-extension",
+    "keywords": ["yii2", "db", "mysql"],
+    "license": "MIT",
+    "homepage": "https://github.com/mkubenka/yii2-db-reconnect",
+    "authors": [
+        {
+            "name": "Michal Kubenka",
+            "homepage": "https://github.com/mkubenka"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "mkubenka\\dbreconnect\\": "src/"
+        }
+    },
+    "require-dev": {
+        "yiisoft/yii2": "~2.0.11",
+        "phpunit/phpunit": "~6.0.8"
+    }
+}
