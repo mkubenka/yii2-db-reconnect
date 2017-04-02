@@ -1,4 +1,4 @@
-# SQS Queue
+# SQS Queue [![Build Status](https://travis-ci.org/mkubenka/yii2-db-reconnect.svg?branch=master)](https://travis-ci.org/mkubenka/yii2-db-reconnect)
 
 > Inspired by:
 >
