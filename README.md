@@ -4,14 +4,20 @@
 >
 > https://github.com/xjflyttp/yii2-db-reconnect
 
-## Composer
+## Installation
+```sh
+composer require mkubenka/yii2-db-reconnect
+```
+
+or
+
 ```json
 "require": {
     "mkubenka/yii2-db-reconnect": "~1.0"
 },
 ```
 
-## Config
+## Configuration
 ```php
 'db' => [
     'class' => 'mkubenka\dbreconnect\mysql\Connection',
@@ -23,7 +29,7 @@
 ],
 ```
 
-## log
+### Logging
 ```php
 'log' => [
     'targets' => [
@@ -40,3 +46,7 @@
     ],
 ],
 ```
+
+## Known limitations
+
+This method only works for non transactional statements.
