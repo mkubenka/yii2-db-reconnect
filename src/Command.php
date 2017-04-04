@@ -105,7 +105,7 @@ class Command extends \yii\db\Command
             if ($db->isReconnectErrMsg($e->getMessage()) === false && $db->getTransaction() !== null) {
                 throw $e;
             }
-            Yii::error('Lost connection', __METHOD__);
+            Yii::info('Lost connection', __METHOD__);
             if (true === $db->isMaxReconnect()) {
                 Yii::error('ReconnectCounter is max', __METHOD__);
                 throw $e;
@@ -140,7 +140,7 @@ class Command extends \yii\db\Command
             if ($db->isReconnectErrMsg($e->getMessage()) === false && $db->getTransaction() !== null) {
                 throw $e;
             }
-            Yii::error('Lost connection', __METHOD__);
+            Yii::info('Lost connection', __METHOD__);
             if (true === $db->isMaxReconnect()) {
                 Yii::error('ReconnectCounter is max', __METHOD__);
                 throw $e;
