@@ -66,7 +66,7 @@ class Command extends \yii\db\Command
     {
         foreach ($this->_prevPendingParams as $name => $data) {
             $value = $data[0];
-            $dataType = $data[1];
+            $dataType = !empty($data[1]) ? $data[1] : null;
             parent::bindValue($name, $value, $dataType);
         }
         return $this;
