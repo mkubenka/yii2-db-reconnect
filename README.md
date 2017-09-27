@@ -1,5 +1,7 @@
 # Yii2 DB Auto Reconnect [![Build Status](https://travis-ci.org/mkubenka/yii2-db-reconnect.svg?branch=master)](https://travis-ci.org/mkubenka/yii2-db-reconnect)
 
+[![Latest Stable Version](https://img.shields.io/packagist/v/mkubenka/yii2-db-reconnect.svg)](https://packagist.org/packages/mkubenka/yii2-db-reconnect)
+
 > Inspired by:
 >
 > https://github.com/xjflyttp/yii2-db-reconnect
