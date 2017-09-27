@@ -23,7 +23,7 @@ RUN apt-get update && apt-get install -y \
     && rm -r /var/lib/apt/lists/*
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-    && composer global require --no-progress "fxp/composer-asset-plugin:~1.2.0"
+    && composer global require --no-progress "fxp/composer-asset-plugin:~1.4.0"
 
 RUN usermod -u ${DOCKER_USER_ID:-1000} www-data \
     && mkdir -p ${APP_BASE_DIR:-/var/www}
