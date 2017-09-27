@@ -34,10 +34,10 @@ class Connection extends \mkubenka\dbreconnect\Connection
     public function getReconnectCodeOptions()
     {
         return [
-            self::ER_LOCK_WAIT_TIMEOUT => 'Lock wait timeout exceeded',
-            self::ER_LOCK_DEADLOCK => 'Deadlock found when trying to get lock',
-            self::CR_SERVER_GONE_ERROR => 'server has gone away',
-            self::CR_SERVER_LOST => 'Lost connection',
+            self::ER_LOCK_WAIT_TIMEOUT,
+            self::ER_LOCK_DEADLOCK,
+            self::CR_SERVER_GONE_ERROR,
+            self::CR_SERVER_LOST,
         ];
     }
 }

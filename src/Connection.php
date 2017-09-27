@@ -57,18 +57,13 @@ class Connection extends \yii\db\Connection implements IReconnect
     }
 
     /**
-     * @param string $message
+     * @param array $errorInfo the error info provided by a PDO exception. This is the same as returned
+     * by [PDO::errorInfo](http://www.php.net/manual/en/pdo.errorinfo.php).
      * @return bool
      */
-    public function isReconnectErrMsg($message)
+    public function isReconnectErrMsg($errorInfo)
     {
-        $errorOptions = static::getReconnectCodeOptions();
-        foreach ($errorOptions as $errCode => $errMsg) {
-            if (false !== stripos($message, $errMsg)) {
-                return true;
-            }
-        }
-        return false;
+        return in_array($errorInfo[1], static::getReconnectCodeOptions());
     }
 
     /**

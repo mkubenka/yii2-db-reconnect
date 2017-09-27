@@ -102,10 +102,10 @@ class Command extends \yii\db\Command
             $db->resetReconnectCount();
             return $result;
         } catch (Exception $e) {
-            if ($db->isReconnectErrMsg($e->getMessage()) === false && $db->getTransaction() !== null) {
+            if (!$db->isReconnectErrMsg($e->errorInfo) || $db->getTransaction() !== null) {
                 throw $e;
             }
-            Yii::info('Lost connection', __METHOD__);
+            Yii::info('Lost connection: ' . $e->getMessage(), __METHOD__);
             if (true === $db->isMaxReconnect()) {
                 Yii::error('ReconnectCounter is max', __METHOD__);
                 throw $e;
@@ -137,10 +137,10 @@ class Command extends \yii\db\Command
             $db->resetReconnectCount();
             return $result;
         } catch (Exception $e) {
-            if ($db->isReconnectErrMsg($e->getMessage()) === false && $db->getTransaction() !== null) {
+            if (!$db->isReconnectErrMsg($e->errorInfo) || $db->getTransaction() !== null) {
                 throw $e;
             }
-            Yii::info('Lost connection', __METHOD__);
+            Yii::info('Lost connection: ' . $e->getMessage(), __METHOD__);
             if (true === $db->isMaxReconnect()) {
                 Yii::error('ReconnectCounter is max', __METHOD__);
                 throw $e;
