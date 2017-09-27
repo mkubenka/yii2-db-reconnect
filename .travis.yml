@@ -13,7 +13,7 @@ addons:
     - mysql
 
 before_script:
-  - composer global require "fxp/composer-asset-plugin"
-  - composer install --prefer-source --no-interaction --dev
+  - travis_retry composer global require "fxp/composer-asset-plugin"
+  - travis_retry composer install --prefer-dist --no-interaction
 
   - mysql -e 'CREATE DATABASE test;'
