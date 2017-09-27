@@ -85,6 +85,29 @@ class Command extends \yii\db\Command
     }
 
     /**
+     * @param yii\db\Exception $e
+     * @throws Exception if the query causes any problem
+     */
+    protected function processException($e)
+    {
+        if (!$this->db->isReconnectErrMsg($e->errorInfo) || $this->db->getTransaction() !== null) {
+            throw $e;
+        }
+
+        Yii::info('Lost connection: ' . $e->getMessage(), __METHOD__);
+
+        if (true === $this->db->isMaxReconnect()) {
+            Yii::error('ReconnectCounter is max', __METHOD__);
+            throw $e;
+        }
+
+        Yii::info('Reconnect', __METHOD__);
+        $this->db->reconnect();
+        $this->db->incrementReconnectCount();
+        $this->prepareForReconnect();
+    }
+
+    /**
      * Performs the actual DB query of a SQL statement.
      * @param string $method method of PDOStatement to be called
      * @param integer $fetchMode the result fetch mode. Please refer to [PHP manual](http://www.php.net/manual/en/function.PDOStatement-setFetchMode.php)
@@ -102,21 +125,8 @@ class Command extends \yii\db\Command
             $db->resetReconnectCount();
             return $result;
         } catch (Exception $e) {
-            if (!$db->isReconnectErrMsg($e->errorInfo) || $db->getTransaction() !== null) {
-                throw $e;
-            }
-            Yii::info('Lost connection: ' . $e->getMessage(), __METHOD__);
-            if (true === $db->isMaxReconnect()) {
-                Yii::error('ReconnectCounter is max', __METHOD__);
-                throw $e;
-            }
-            //BEGIN RECONNECT
-            Yii::info('Reconnect', __METHOD__);
-            $db->reconnect();
-            $db->incrementReconnectCount();
-            $this->prepareForReconnect();
+            $this->processException($e);
 
-            //REQUERY
             return $this->queryInternal($method, $fetchMode);
         }
     }
@@ -137,19 +147,7 @@ class Command extends \yii\db\Command
             $db->resetReconnectCount();
             return $result;
         } catch (Exception $e) {
-            if (!$db->isReconnectErrMsg($e->errorInfo) || $db->getTransaction() !== null) {
-                throw $e;
-            }
-            Yii::info('Lost connection: ' . $e->getMessage(), __METHOD__);
-            if (true === $db->isMaxReconnect()) {
-                Yii::error('ReconnectCounter is max', __METHOD__);
-                throw $e;
-            }
-            //BEGIN RECONNECT
-            Yii::info('Reconnect', __METHOD__);
-            $db->reconnect();
-            $db->incrementReconnectCount();
-            $this->prepareForReconnect();
+            $this->processException($e);
 
             return $this->execute();
         }
