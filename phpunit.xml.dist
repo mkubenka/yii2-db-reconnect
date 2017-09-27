@@ -2,9 +2,9 @@
 <phpunit bootstrap="./tests/bootstrap.php"
     colors="true"
     verbose="true"
-    convertErrorsToExceptions="true"
-    convertNoticesToExceptions="true"
-    convertWarningsToExceptions="true"
+    convertErrorsToExceptions="false"
+    convertNoticesToExceptions="false"
+    convertWarningsToExceptions="false"
     stopOnFailure="false">
     <testsuites>
       <testsuite name="Yii2 DB Auto Reconnect Test Suite">
