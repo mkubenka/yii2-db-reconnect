@@ -42,4 +42,15 @@ class MysqlTest extends TestCase {
         $this->assertTrue(true);
     }
 
+    public function testTransaction()
+    {
+        $this->expectException(\yii\db\Exception::class);
+
+        Yii::$app->db->beginTransaction();
+
+        Yii::$app->db->createCommand('SELECT NOW()')->execute();
+        sleep(10);
+        Yii::$app->db->createCommand('SELECT NOW()')->execute();
+    }
+
 }
