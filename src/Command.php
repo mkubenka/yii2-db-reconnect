@@ -90,7 +90,15 @@ class Command extends \yii\db\Command
      */
     protected function processException($e)
     {
-        if (!$this->db->isReconnectErrMsg($e->errorInfo) || $this->db->getTransaction() !== null) {
+        $errorInfo = $e->errorInfo;
+
+        // PDOStatement does not throw PDOException sometimes and errorInfo has to be populated manually.
+        // https://bugs.php.net/bug.php?id=73878
+        if (!$errorInfo && $this->pdoStatement) {
+            $errorInfo = $this->pdoStatement->errorInfo();
+        }
+
+        if (!$this->db->isReconnectErrMsg($errorInfo) || $this->db->getTransaction() !== null) {
             throw $e;
         }
 
