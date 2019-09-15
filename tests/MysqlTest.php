@@ -26,20 +26,16 @@ class MysqlTest extends TestCase {
     public function testQueryRetry()
     {
         $command = Yii::$app->db->createCommand('SELECT NOW()');
-        $command->queryAll();
+        $this->assertCount(1, $command->queryAll());
         sleep(10);
-        $command->queryAll();
-
-        $this->assertTrue(true);
+        $this->assertCount(1, $command->queryAll());
     }
 
     public function testExecuteRetry()
     {
-        Yii::$app->db->createCommand('SELECT NOW()')->execute();
+        $this->assertEquals(1, Yii::$app->db->createCommand('SELECT NOW()')->execute());
         sleep(10);
-        Yii::$app->db->createCommand('SELECT NOW()')->execute();
-
-        $this->assertTrue(true);
+        $this->assertEquals(1, Yii::$app->db->createCommand('SELECT NOW()')->execute());
     }
 
     public function testTransaction()
@@ -48,9 +44,9 @@ class MysqlTest extends TestCase {
 
         Yii::$app->db->beginTransaction();
 
-        Yii::$app->db->createCommand('SELECT NOW()')->execute();
+        $this->assertEquals(1, Yii::$app->db->createCommand('SELECT NOW()')->execute());
         sleep(10);
-        Yii::$app->db->createCommand('SELECT NOW()')->execute();
+        $this->assertEquals(1, Yii::$app->db->createCommand('SELECT NOW()')->execute());
     }
 
 }
